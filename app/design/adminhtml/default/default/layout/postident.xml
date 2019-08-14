@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!--
+ /**
+ * @category   Layout
+ * @package    DeutschePost_Postident
+ * @author     André Herrn <andre.herrn@netresearch.de>
+ * @author     Sebastian Ertner <sebastian.ertner@netresearch.de>
+ * @copyright  Copyright (c) 2012 Netresearch GmbH & Co. KG
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<layout>
+    <adminhtml_system_config_edit>
+        <reference name="head">
+            <action method="addJs"><script>postident/adminhtml/validation.js</script></action>
+            <action method="addJs"><script>postident/adminhtml/checkconnect.js</script></action>
+        </reference>
+        <reference name="content">
+            <block name="postident_validate" type="adminhtml/template" template="postident/validate.phtml" />
+        </reference>
+    </adminhtml_system_config_edit>
+    
+    <adminhtml_customer_edit>
+        <reference name="customer_edit_tabs">
+            <action method="addTab">
+                <name>customer_edit_tab_postident_verificationdata</name>
+                <block>postident/adminhtml_customer_edit_tab_verificationdata</block>
+            </action>
+        </reference>
+    </adminhtml_customer_edit>
+
+</layout>

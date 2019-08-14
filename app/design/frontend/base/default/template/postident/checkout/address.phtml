@@ -1,0 +1,83 @@
+<?php
+/**
+ * @category   DeutschePost Postident
+ * @package    DeutschePost_Postident
+ * @author     André Herrn <andre.herrn@netresearch.de>
+ * @author     Sebastian Ertner <sebastian.ertner@netresearch.de>
+ * @copyright  Copyright (c) 2012 Netresearch GmbH & Co. KG
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+?>
+
+<script type="text/javascript">
+//<![CDATA[
+    //Initialize Postident Class with JSON Identification data
+    var postidentAddressData = new PostidentAddressData('<?php echo $this->getPostidentDataAsJson() ?>');
+
+    //If Dom is loaded -> Set event listeners to billing address and shipping address form
+    document.observe("dom:loaded", function() {
+
+
+        /*
+         * early return if there is no postident data
+         * so we wont show the button in the checkout
+         */
+        if (false === postidentAddressData.hasPostidentData()) {
+            return;
+        }
+
+        /*
+         * Move the postident button and hover window to the new address node
+         * After it will be visible only if "New address" was selected in the address selector
+         */
+        movePostidentButtonToAddressEnd("billing");
+        movePostidentButtonToAddressEnd("shipping");
+        setEventToButton('billing');
+        setEventToButton('shipping');
+
+    });
+
+    //Add Javascript-Translations for Prefix Field
+    Translator.add('mr', '<?php echo Mage::helper('postident')->__('mr') ?>');
+    Translator.add('mrs', '<?php echo Mage::helper('postident')->__('mrs') ?>');
+
+    function setEventToButton(addressType)
+    {
+        //If form fields are empty - automatically replace address fields with Postident Data
+        if (true === postidentAddressData.checkFormFieldsEmpty(addressType)) {
+            postidentAddressData.updateFormData(addressType);
+        }
+
+        //Show/Hide Hover-Window with Postident address data
+        Event.observe($('postidentinfo_sign_' + addressType), 'mouseover', function(event) {
+            $('postidentinfo_content_' + addressType).style.display = 'block';
+        })
+        Event.observe($('postidentinfo_sign_' + addressType), 'mouseout', function(event) {
+            $('postidentinfo_content_' + addressType).style.display = 'none';
+        })
+    }
+
+
+    function movePostidentButtonToAddressEnd(addressType) {
+        //Postident Node to replace
+        var postidentNode = $('postident_' + addressType + '_adressdata');
+
+        //New address form node
+        var newAddressNode = $(addressType + '-new-address-form');
+
+        //Check if both nodes exist
+        if (null === postidentNode || null === newAddressNode) {
+            return;
+        }
+
+        //Add postident node at the end of the new address area
+        newAddressNode.insertBefore(postidentNode, newAddressNode.lastChild);
+
+        //Enable visibility of postident node
+        if (false === postidentAddressData.checkFormFieldsEmpty(addressType)
+                && false === postidentAddressData.checkFormFieldsAreSame(addressType)) {
+            postidentNode.show();
+        }
+    }
+//]]>
+</script>

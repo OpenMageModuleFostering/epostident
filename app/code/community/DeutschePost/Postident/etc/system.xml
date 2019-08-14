@@ -1,0 +1,252 @@
+<?xml version="1.0"?>
+<!--
+ /**
+ * @category   Config
+ * @package    DeutschePost_Postident
+ * @author     André Herrn <andre.herrn@netresearch.de>
+ * @author     Sebastian Ertner <sebastian.ertner@netresearch.de>
+ * @copyright  Copyright (c) 2012 Netresearch GmbH & Co. KG
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<config>
+    <sections>
+        <postident translate="label"  module="postident">
+            <label>E-POSTIDENT</label>
+            <tab>sales</tab>
+            <sort_order>325</sort_order>
+            <frontend_type>text</frontend_type>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label comment" module="postident">
+                    <label>Basic configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label comment" module="postident">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <logging_enabled translate="label comment">
+                            <label>Logging enabled</label>
+                            <comment><![CDATA[Please ensure that the Magento-Log is activated.]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>200</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </logging_enabled>
+                    </fields>
+                </general>
+                <master_data translate="label comment" module="postident">
+                    <label>master data</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>  
+                    <fields>
+                        <client_id translate="label comment" module="postident">
+                            <label>Client ID</label>
+                            <comment><![CDATA[The Client-ID must be in the following format: xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx where x is a character from 0-9 a-f A-F and y either 8,9,A or B.]]></comment>
+                            <frontend_type>Text</frontend_type>
+                            <backend_model>postident/system_config_clientid</backend_model>
+                            <validate>required-entry validate-clientid</validate>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </client_id>
+                        <check_connect_button translate="label comment">
+                            <frontend_model>postident/adminhtml_system_config_checkconnect_button</frontend_model>
+                            <frontend_type>button</frontend_type>
+                            <sort_order>200</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </check_connect_button>
+                        <client_secret translate="label comment">
+                            <label>ClientSecret</label>
+                            <frontend_type>password</frontend_type>
+                            <validate>required-entry validate-clientsecret validate-length maximum-length-20 minimum-length-10</validate>
+                            <sort_order>300</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </client_secret>
+                        <domain_uri_notice translate="label">
+                            <label>Contact to Service-Center</label>
+                            <frontend_type>text</frontend_type>
+                            <frontend_model>postident/adminhtml_system_config_domainuri_notice</frontend_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </domain_uri_notice>
+                    </fields>
+                </master_data>
+                <idcard translate="label comment" module="postident">
+                    <label>ID-Cards</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>30</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <number translate="label comment" module="postident">
+                            <label>ID-Card Name</label>
+                            <comment><![CDATA[Please select the ID-Card which you want to use for the customer identification. More detailed informations about all possible ID-Cards can be found here: <a href="http://www.netresearch.de/fileadmin/user_upload/partner-deutschepost/epostident/downloads/ID-Card_und_PreisA1_4bersicht_E-POSTIDENT.pdf">E_PSOTIDENT price-list</a>]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>postident/system_config_source_idcards</source_model>
+                            <validate>required-entry</validate>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </number>
+                        <testmode translate="label comment" module="postident">
+                            <label>Testmode</label>
+                            <comment><![CDATA[If test mode is activated, a charge free Test ID-Card will be used. This ID Card returns the values:<br />- first name<br />- last name<br />- date of birth<br />- E-Postbrief address<br />- mobile number]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </testmode>
+                    </fields>
+                </idcard>
+                <gateway_urls translate="label comment" module="postident">
+                    <label>Gateway URLs</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>40</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <gateway_notice translate="label">
+                            <label>Gateway Notes</label>
+                            <frontend_type>text</frontend_type>
+                            <frontend_model>postident/adminhtml_system_config_gateway_notice</frontend_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </gateway_notice>
+                         <check_connect_url translate="label comment">
+                            <label>Check Connect URL</label>
+                            <frontend_type>Text</frontend_type>
+                            <comment><![CDATA[Gateway URL for the Check Connect Service]]></comment>
+                            <validate>required-entry validate-url</validate>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </check_connect_url>
+                        <postident_url translate="label comment">
+                            <label>E-POSTIDENT URL</label>
+                            <frontend_type>Text</frontend_type>
+                            <comment><![CDATA[Gateway URL for the E-POSTIDENT-Verification Request]]></comment>
+                            <validate>required-entry validate-url</validate>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </postident_url>
+                        <access_ticket_url translate="label comment">
+                            <label>Access-Token URL</label>
+                            <frontend_type>Text</frontend_type>
+                            <comment><![CDATA[The Gateway URL for E-POSTIDENT-Verification Access-Ticket-Request.]]></comment>
+                            <validate>required-entry validate-url</validate>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </access_ticket_url>
+                        <identdata_url>
+                            <label>Identdata URL</label>
+                            <frontend_type>Text</frontend_type>
+                            <comment><![CDATA[The Gateway URL for E_POSTIDENT-Verification Identity-Request.]]></comment>
+                            <validate>required-entry validate-url</validate>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </identdata_url>
+                    </fields>
+                </gateway_urls>
+                <verification_criteria translate="label comment" module="postident">
+                    <label>Verification Criteria</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>50</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                         <age_verification translate="label comment">
+                            <label>Minimum age (in years)</label>
+                            <frontend_type>Text</frontend_type>
+                            <comment><![CDATA[Leave field empty or enter "0" if there should be no age verification. The minimum age, if filled, is used as criteria to enter the checkout and finish the order.]]></comment>
+                            <validate>validate-number</validate>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </age_verification>
+                        <checkout_verification translate="label comment">
+                            <label>Verification on every Checkout</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment><![CDATA[Enable, if a new verification is needed for every checkout.]]></comment>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </checkout_verification>
+                        <verification_type translate="label comment">
+                            <label>Verification type</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>DeutschePost_Postident_Model_System_Config_Source_Verificationtype</source_model>
+                            <comment><![CDATA[Here you can select which type of age verification is used.]]></comment>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </verification_type>
+                    </fields>
+                </verification_criteria>
+                <checkout translate="label comment" module="postident">
+                    <label>Checkout</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                         <use_address_data translate="label comment">
+                            <label>Address data usage</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment><![CDATA[If activated, the customer can use his verified address data to populate registration and shipping form.]]></comment>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </use_address_data>
+                    </fields>
+                </checkout>
+            </groups>
+        </postident>
+    </sections>
+</config>

@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!--
+ /**
+ * @category   Config
+ * @package    DeutschePost_Postident
+ * @author     André Herrn <andre.herrn@netresearch.de>
+ * @author     Sebastian Ertner <sebastian.ertner@netresearch.de>
+ * @copyright  Copyright (c) 2012 Netresearch GmbH & Co. KG
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<config>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <postident translate="title" module="postident">
+                                        <title>E-POSTIDENT</title>
+                                    </postident>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

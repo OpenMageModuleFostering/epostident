@@ -1,0 +1,12 @@
+tables:  
+  sales/order:
+
+   - entity_id:           1
+     increment_id:        100000055
+     shipping_address_id: 42
+     base_grand_total:    119.00
+     grand_total:         119.00
+     currency:            'EUR'
+     customer_gender:     1
+     shipping_method:     'flatrate_flatrate'
+     customer_email:      'hubertus.von.fuerstenberg@trash-mail.com'

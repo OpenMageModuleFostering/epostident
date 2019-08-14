@@ -1,0 +1,43 @@
+<?php
+/**
+ * @category   DeutschePost Postident
+ * @package    DeutschePost_Postident
+ * @author     André Herrn <andre.herrn@netresearch.de>
+ * @author     Sebastian Ertner <sebastian.ertner@netresearch.de>
+ * @copyright  Copyright (c) 2012 Netresearch GmbH & Co. KG
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+?>
+<?php
+/**
+ * @see DeutschePost_Postident_Block_Checkout_Cart_Link
+ */
+?>
+<?php
+    $helper = Mage::helper("postident");
+    $buttonText = $helper->__('Identify now');
+?>
+
+<div class="postident_verification">
+    <p class="verification_text">
+        <!-- Age verification -->
+        <?php if ($this->getIdCard() == DeutschePost_Postident_Model_IdCard_IdCard120::IDCARD_VALUE): ?>
+            <?php echo $helper->__("You have age-restricted products in your shopping cart. For child-protection reasons, we ask for an age verification by") ?>
+            <?php $buttonText = $helper->__('Verify age now') ?>
+        <!-- Identification -->
+        <?php else: ?>
+            <?php echo $helper->__("For safety reasons we ask for an online identification by") ?>
+        <?php endif; ?>
+    </p>
+    <img
+        src="<?php echo $this->getSkinUrl('images/postident/produktzeichen/DP_E-POSTIDENT_Produktzeichen_160.png'); ?>"
+        title="<?php echo $helper->__("E-POSTIDENT Logo"); ?>"
+        class="epostident_logo" />
+    <button class="button btn-proceed-checkout btn-checkout"
+        onclick="window.location = '<?php echo $this->getPostidentLink() ?>';"
+        title="<?php echo $buttonText ?>" type="button">
+        <span>
+            <span><?php echo $buttonText ?></span>
+        </span>
+    </button>
+</div>

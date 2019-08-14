@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<!--
+ /**
+ * @category   Layout
+ * @package    DeutschePost_Postident
+ * @author     André Herrn <andre.herrn@netresearch.de>
+ * @author     Sebastian Ertner <sebastian.ertner@netresearch.de>
+ * @copyright  Copyright (c) 2012 Netresearch GmbH & Co. KG
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<layout version="0.1.0">
+    <!-- 
+    Custom Update Handle
+    
+    IF veritifaction doesn't exist for the customer
+    AND verification is required
+    THEN remove checkout buttons
+    -->
+    
+    <!-- All Shop areas -->
+    <postident_verification_required>
+        <reference name="top.links">
+            <!-- Remove cart and checkout link - unfortunately only both of them can be deleted together --> 
+            <remove name="checkout_cart_link" />
+            
+            <!-- Welcome back cart link - Add cart link after it was removed -->
+            <block type="checkout/links" name="checkout_cart_link_custom">
+                <action method="addCartLink"></action>
+            </block>
+        </reference>
+    </postident_verification_required>
+    
+    <!-- Checkout cart area -->
+    <postident_checkout_cart_verification_required>
+        <reference name="checkout.cart">
+            <!-- Remove "Checkout"/"Zur Kasse"-Buttons -->
+            <remove name="checkout.cart.methods.onepage" />
+            
+            <!-- Remove Multishipping Bottom Block -->
+            <remove name="checkout.cart.methods.multishipping" />
+            
+            <!-- Remove Paypal UK Express Bottom Block -->
+            <remove name="checkout.cart.methods.paypaluk_express.bottom" />
+            
+            <!-- Remove Paypal Express Bottom Block -->
+            <remove name="checkout.cart.methods.paypal_express.bottom" />
+            
+            <!-- Remove Googlecheckout Bottom Block -->
+            <remove name="checkout.cart.methods.googlecheckout.bottom" />
+            
+            <!-- Remove Paypal UK Express Top Block -->
+            <remove name="checkout.cart.methods.paypaluk_express.top" />
+            
+            <!-- Remove Paypal Express Top Block -->
+            <remove name="checkout.cart.methods.paypal_express.top" />
+            
+            <!-- Remove Googlecheckout Top Block -->
+            <remove name="checkout.cart.methods.googlecheckout.top" />
+        </reference>
+        
+        <!-- Add PostIdent Info Block -->
+        <reference name="checkout.cart.methods">
+            <block 
+                type="postident/checkout_cart_link"
+                name="checkout.cart.methods.postident_link.bottom"
+                before="-">
+                <action method="setTemplate">
+                    <template>postident/checkout/cart/link.phtml</template>
+                </action>
+            </block>
+        </reference>
+        
+        <!-- Add postident.css -->
+        <reference name="head">
+            <action method="addCss"><stylesheet>css/postident.css</stylesheet></action>
+        </reference>
+    </postident_checkout_cart_verification_required>
+    
+     <!-- onepage checkout area -->
+    <checkout_onepage_index>
+        <reference name="head">
+            <action method="addCss" ifconfig="postident/checkout/use_address_data"><stylesheet>css/postident.css</stylesheet></action>
+        </reference>
+        
+        <!-- Add address.phtml to checkout -->
+        <reference name="content">
+            <block type="postident/checkout_address" name="postident_address_data" as="postident_address_data">
+                <action method="setTemplate" ifconfig="postident/checkout/use_address_data">
+                    <template>postident/checkout/address.phtml</template>
+                </action>                    
+            </block>
+        </reference>
+        
+         <!-- Add addressdata.js to checkout -->
+        <reference name="head">
+            <action method="addJs" ifconfig="postident/checkout/use_address_data"><script>postident/checkout/addressdata.js</script></action>
+        </reference>
+    </checkout_onepage_index>
+</layout>

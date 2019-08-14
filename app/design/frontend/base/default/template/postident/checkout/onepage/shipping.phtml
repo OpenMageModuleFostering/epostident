@@ -1,0 +1,46 @@
+<?php
+/**
+ * @category   DeutschePost Postident
+ * @package    DeutschePost_Postident
+ * @author     André Herrn <andre.herrn@netresearch.de>
+ * @author     Sebastian Ertner <sebastian.ertner@netresearch.de>
+ * @copyright  Copyright (c) 2012 Netresearch GmbH & Co. KG
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+?>
+
+<?php $identData = $this->getPostidentData() ?>
+
+<div id="postident_shipping_adressdata" class="postident_adressdata" style="display:none">
+    <div class="field">
+        <button
+            class="button"
+            id="shipping-use-postidentdata-button"
+            title="<?php echo $this->__('Prefill form fields with verified E-POSTIDENT data'); ?>"
+            onclick="postidentAddressData.updateFormData('shipping');return false;">
+            <span>
+                <span><?php echo $this->__('Use E-POSTIDENT data'); ?></span>
+            </span>
+        </button>
+         <div class="postidentinfo">
+            <span id="postidentinfo_sign_shipping">?<span>
+                    <div class="postidentinfo_content" id="postidentinfo_content_shipping">
+                        <p><?php echo $this->__('This is your verified data.') ?>
+                            <img id="postidentlogo" src="<?php echo $this->getSkinUrl('images/postident/produktzeichen/DP_E-POSTIDENT_Produktzeichen_160'); ?>" alt="produktzeichen" />
+                        </p>
+                        <?php if (is_array($identData)): ?>
+                            <table class="identdatatable">
+                                <tbody>
+                                    <?php foreach ($identData as $key => $value): ?>
+                                        <tr>
+                                            <td><strong><?php echo $this->__($this->escapeHtml($key)) . ":"; ?></strong></td>
+                                            <td><?php echo $this->__($this->escapeHtml($value)); ?></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        <?php endif; ?>
+                  </div>
+           </div>
+    </div>
+</div>

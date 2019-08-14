@@ -1,0 +1,12 @@
+<script type="text/javascript">
+    var domainUri       = "<?php Mage::helper('postident')->getDomainUri(); ?>";
+</script>
+<div class="switcher">
+    <h3><?php print Mage::helper('postident')->__('Domain-URI') ?></h3>
+    <p><?php print Mage::helper('postident')->__('Actual Store-Domain-URI:') ?> <b> <?php print  Mage::helper('postident')->getDomainUri(); ?> </b> </p>
+    <p>
+        <?php print Mage::helper('postident')->__('Please check that the actual Store-Domain-URI is entered in the E-POSTIDENT self administration portal and is set to active.') ?> <br>
+        <?php print Mage::helper('postident')->__('Please enter all domains of your stores in which E-POSTIDENT should be used also in the E-POSTIDENT self administration portal.') ?> <br>
+        <?php print Mage::helper('postident')->__('The Domain associated parameters Client-ID, Client Secret and Alias need to be entered here.') ?> <br>
+    </p>
+</div>
